@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bhanu Singh — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #1a3a5c;
+      --accent-light: #e8edf3;
+      --border: #ddd9d2;
+      --tag-bg: #eef2f7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(245,243,239,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 80px 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 2px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #122a44; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1.5px solid var(--accent);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--accent-light); }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+    .hero-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .hero-card-title {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .info-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.875rem; color: var(--muted);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .info-label { font-weight: 500; color: var(--ink); min-width: 60px; }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .section-num {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      font-family: 'DM Sans', sans-serif;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    .highlight-box {
+      background: var(--accent);
+      color: white;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .highlight-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .highlight-item {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.9;
+    }
+    .highlight-item::before { content: '→'; flex-shrink: 0; }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .edu-school { color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+    .edu-date {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .courses {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .course-tag {
+      background: var(--tag-bg);
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    .project-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .badge-ml { background: #e8f0fe; color: #1a56db; }
+    .badge-ongoing { background: #fef3cd; color: #b45309; }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+    }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tool-tag {
+      background: var(--tag-bg);
+      color: var(--ink);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .skill-group-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      background: var(--tag-bg);
+      color: var(--ink);
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+    }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .exp-org { color: var(--accent); font-weight: 500; font-size: 0.9rem; margin-bottom: 1rem; }
+    .exp-location { font-size: 0.8rem; color: var(--muted); text-align: right; white-space: nowrap; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+      font-weight: 300;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+
+    /* CONTACT */
+    .contact-inner {
+      background: var(--accent);
+      border-radius: 12px;
+      padding: 4rem;
+      text-align: center;
+      color: white;
+    }
+    .contact-inner h2 {
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+    .contact-inner p {
+      opacity: 0.8;
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+    }
+    .contact-links {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.25); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-card { grid-template-columns: 1fr; }
+      .contact-inner { padding: 2rem 1.5rem; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Bhanu Singh</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-text fade-in">
+        <div class="hero-eyebrow">Undergraduate Researcher</div>
+        <h1>Bhanu<br/>Singh</h1>
+        <p class="hero-desc">
+          Electronics & Computer Science student at the University of Edinburgh, 
+          passionate about machine learning, AI systems, and building tools that bridge research and real-world impact.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-card fade-in" style="transition-delay:0.2s">
+        <div class="hero-card-name">Bhanu Singh</div>
+        <div class="hero-card-title">BEng Electronics & Computer Science · Year 2</div>
+        <div class="info-row">
+          <span class="info-icon">📍</span>
+          <span class="info-label">Location</span>
+          <span>Edinburgh, Scotland, UK</span>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">🎓</span>
+          <span class="info-label">University</span>
+          <span>University of Edinburgh</span>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">📅</span>
+          <span class="info-label">Graduation</span>
+          <span>May 2027</span>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">💡</span>
+          <span class="info-label">Focus</span>
+          <span>ML · AI · Embedded Systems</span>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">✉️</span>
+          <span class="info-label">Email</span>
+          <span>bhanutomar1426@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header fade-in">
+      <span class="section-num">01</span>
+      <h2>About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>
+          I'm a second-year Electronics and Computer Science student at the University of Edinburgh, 
+          driven by a deep curiosity about how intelligent systems can be built to solve complex, real-world problems.
+        </p>
+        <p>
+          My work spans machine learning, computer vision, and AI infrastructure — from developing CNN-based 
+          medical imaging pipelines to exploring multimodal data integration. I'm especially interested in how 
+          AI can be responsibly applied to high-stakes domains like healthcare.
+        </p>
+        <p>
+          Beyond the technical side, I've led teams as Club President of the Robox Club at VIT, 
+          organised technical fests, and participated in industry hackathons. I thrive in collaborative 
+          environments where engineering meets meaningful impact.
+        </p>
+      </div>
+      <div class="highlight-box">
+        <h3>What I Bring</h3>
+        <div class="highlight-item">Strong Python ML background (TensorFlow, PyTorch)</div>
+        <div class="highlight-item">Experience building end-to-end training pipelines</div>
+        <div class="highlight-item">Leadership and collaboration across technical teams</div>
+        <div class="highlight-item">Self-directed learning on ongoing research projects</div>
+        <div class="highlight-item">Passion for AI research & real-world deployment</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="background: var(--surface); max-width:100%; padding: 5rem 0;">
+    <div style="max-width:1100px; margin:0 auto; padding: 0 2rem;">
+      <div class="section-header fade-in">
+        <span class="section-num">02</span>
+        <h2>Education</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="edu-card fade-in">
+        <div>
+          <div class="edu-degree">Bachelor of Engineering — Electronics and Computer Science</div>
+          <div class="edu-school">University of Edinburgh</div>
+          <div class="courses">
+            <span class="course-tag">Machine Learning</span>
+            <span class="course-tag">Data Structures</span>
+            <span class="course-tag">Algorithms Analysis</span>
+            <span class="course-tag">AI & ML Frameworks</span>
+            <span class="course-tag">Computer Architecture</span>
+            <span class="course-tag">Operating Systems</span>
+            <span class="course-tag">Digital Logic Design</span>
+            <span class="course-tag">Parallel Programming</span>
+            <span class="course-tag">Object-Oriented Programming</span>
+            <span class="course-tag">Hardware Embedded Systems</span>
+          </div>
+        </div>
+        <div class="edu-date">Sep 2023 – May 2027<br/>Edinburgh, UK</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header fade-in">
+      <span class="section-num">03</span>
+      <h2>Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <span class="project-badge badge-ml">Machine Learning</span>
+        <div class="project-title">Kidney Stone Detection</div>
+        <p class="project-desc">
+          Built an image classification model to detect kidney stones from medical scans using 
+          CNN architectures. Applied data augmentation and implemented 
+          a full training pipeline with early stopping and evaluation metrics.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">TensorFlow</span>
+          <span class="tool-tag">OpenCV</span>
+          <span class="tool-tag">Google Colab</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" style="transition-delay:0.1s">
+        <span class="project-badge badge-ml">Machine Learning</span>
+        <div class="project-title">Student Marks Prediction</div>
+        <p class="project-desc">
+          Implemented regression models to predict academic performance. 
+          Explored data preprocessing, feature selection, and model tuning techniques 
+          to improve predictive accuracy.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">scikit-learn</span>
+          <span class="tool-tag">Pandas</span>
+          <span class="tool-tag">NumPy</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" style="transition-delay:0.2s">
+        <span class="project-badge badge-ongoing">Ongoing</span>
+        <div class="project-title">Leukemia Detection Model</div>
+        <p class="project-desc">
+          Developing an AI/ML model for detecting Acute Myeloid Leukemia (AML) using both 
+          blood smear images and clinical data. Using ResNet50 backbone to integrate image data 
+          with tabular patient information using CNNs for enhanced predictive accuracy.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">TensorFlow</span>
+          <span class="tool-tag">Keras</span>
+          <span class="tool-tag">ResNet50</span>
+          <span class="tool-tag">CNN</span>
+          <span class="tool-tag">Multimodal</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="background: var(--surface); max-width:100%; padding: 5rem 0;">
+    <div style="max-width:1100px; margin:0 auto; padding: 0 2rem;">
+      <div class="section-header fade-in">
+        <span class="section-num">04</span>
+        <h2>Skills</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group fade-in">
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C/C++</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Bash Scripting</span>
+            <span class="skill-tag">Verilog</span>
+          </div>
+        </div>
+        <div class="skill-group fade-in" style="transition-delay:0.1s">
+          <div class="skill-group-title">ML & AI Frameworks</div>
+          <div class="skill-tags">
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">scikit-learn</span>
+            <span class="skill-tag">Keras</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Pandas</span>
+          </div>
+        </div>
+        <div class="skill-group fade-in" style="transition-delay:0.2s">
+          <div class="skill-group-title">Web & Dev Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Virtual Machines</span>
+            <span class="skill-tag">Google Colab</span>
+          </div>
+        </div>
+        <div class="skill-group fade-in" style="transition-delay:0.3s">
+          <div class="skill-group-title">Hardware & Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Computer Architecture</span>
+            <span class="skill-tag">Microprocessors</span>
+            <span class="skill-tag">FPGA Basics</span>
+            <span class="skill-tag">Digital Logic Design</span>
+          </div>
+        </div>
+        <div class="skill-group fade-in" style="transition-delay:0.4s">
+          <div class="skill-group-title">Software Development</div>
+          <div class="skill-tags">
+            <span class="skill-tag">OOP</span>
+            <span class="skill-tag">Data Structures</span>
+            <span class="skill-tag">Algorithms</span>
+            <span class="skill-tag">Operating Systems</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header fade-in">
+      <span class="section-num">05</span>
+      <h2>Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-card fade-in">
+        <div>
+          <div class="exp-role">Club President</div>
+          <div class="exp-org">Robox Club — VIT, India</div>
+          <ul class="exp-bullets">
+            <li>Organized and managed robotics and tech-related events.</li>
+            <li>Collaborated with peers on embedded systems and AI projects.</li>
+            <li>Developed teamwork and problem-solving abilities through club projects.</li>
+          </ul>
+        </div>
+        <div class="exp-location">VIT, India</div>
+      </div>
+      <div class="exp-card fade-in" style="transition-delay:0.1s">
+        <div>
+          <div class="exp-role">Campus Ambassador</div>
+          <div class="exp-org">Mindenious Edtech</div>
+          <ul class="exp-bullets">
+            <li>Represented the organization at Vellore Institute of Technology.</li>
+            <li>Promoted technical events and built engagement among students.</li>
+            <li>Strengthened communication, leadership, and event management skills.</li>
+          </ul>
+        </div>
+        <div class="exp-location">Bangalore, India</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner fade-in">
+      <h2>Let's Connect</h2>
+      <p>Open to research internships, collaborations, and opportunities in ML & AI.</p>
+      <div class="contact-links">
+        <a href="mailto:bhanutomar1426@gmail.com" class="contact-link">✉️ bhanutomar1426@gmail.com</a>
+        <a href="tel:+447440026983" class="contact-link">📞 +44 744-002-6983</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Bhanu Singh · Edinburgh, Scotland
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
